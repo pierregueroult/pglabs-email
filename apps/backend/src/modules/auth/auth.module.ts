@@ -8,6 +8,8 @@ import { AuthController } from "./auth.controller";
 import { OauthStrategy } from "./strategies/oauth.strategy";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 
+import { MailProvisioningModule } from "../mail-provisioning/mail-provisioning.module";
+
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -20,8 +22,9 @@ import { JwtStrategy } from "./strategies/jwt.strategy";
       }),
       inject: [ConfigService],
     }),
+    MailProvisioningModule,
   ],
   providers: [AuthService, OauthStrategy, JwtStrategy],
   controllers: [AuthController],
 })
-export class AuthModule {}
+export class AuthModule { }

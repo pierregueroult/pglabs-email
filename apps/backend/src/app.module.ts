@@ -14,18 +14,22 @@ import { HealthController } from "./modules/health/health.controller";
 
 import { validate } from "./config/env.validation";
 
+import { mailConfig } from "./config/mail.config";
+import { MailProvisioningModule } from "./modules/mail-provisioning/mail-provisioning.module";
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, authConfig],
+      load: [appConfig, authConfig, mailConfig],
       validate,
     }),
     TerminusModule,
     HttpModule,
     AuthModule,
+    MailProvisioningModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

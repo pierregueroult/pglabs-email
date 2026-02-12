@@ -57,6 +57,27 @@ class EnvironmentVariables {
   @IsUrl({ require_tld: false })
   @IsOptional()
   OAUTH_USER_INFO_URL: string = "http://localhost/";
+
+  @IsUrl({ require_tld: false })
+  STALWART_API_URL: string;
+
+  @IsString()
+  STALWART_ADMIN_USERNAME: string;
+
+  @IsString()
+  STALWART_ADMIN_PASSWORD: string;
+
+  @IsUrl({ require_tld: false })
+  KEYCLOAK_ADMIN_URL: string;
+
+  @IsString()
+  KEYCLOAK_ADMIN_REALM: string;
+
+  @IsString()
+  KEYCLOAK_ADMIN_CLIENT_ID: string;
+
+  @IsString()
+  KEYCLOAK_ADMIN_CLIENT_SECRET: string;
 }
 
 export function validate(config: Record<string, unknown>) {
