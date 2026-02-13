@@ -34,4 +34,4 @@ import { IntegrationModule } from "./modules/integration/integration.module";
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

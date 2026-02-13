@@ -9,7 +9,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const port = configService.getOrThrow<number>("app.port");
-  const origins = configService.getOrThrow<string>("app.corsOrigins").split(",");
+  const origins = configService
+    .getOrThrow<string>("app.corsOrigins")
+    .split(",");
 
   app.enableCors({
     origins,

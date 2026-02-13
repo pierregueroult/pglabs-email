@@ -12,7 +12,7 @@ export class MailProvisioningService {
     private readonly keycloakAdminService: KeycloakAdminService,
     private readonly stalwartService: StalwartService,
     private readonly cryptoService: CryptoService,
-  ) { }
+  ) {}
 
   async provisionMailbox(userId: string) {
     const user = await this.keycloakAdminService.getUser(userId);

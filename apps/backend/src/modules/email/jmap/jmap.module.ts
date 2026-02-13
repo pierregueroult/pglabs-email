@@ -8,14 +8,14 @@ import { KeycloakModule } from "../../integration/keycloak/keycloak.module";
 import { StalwartModule } from "../../integration/stalwart/stalwart.module";
 
 @Module({
-    imports: [
-        HttpModule,
-        ConfigModule,
-        MailProvisioningModule,
-        KeycloakModule,
-        StalwartModule,
-    ],
-    providers: [JmapService],
-    controllers: [JmapController],
+  imports: [
+    HttpModule,
+    ConfigModule,
+    MailProvisioningModule,
+    KeycloakModule,
+    StalwartModule,
+  ],
+  providers: [JmapService],
+  controllers: [JmapController],
 })
-export class JmapModule { }
+export class JmapModule {}

@@ -7,19 +7,8 @@ import { CryptoService } from "./crypto.service";
 import { MailProvisioningService } from "./provisioning.service";
 
 @Module({
-  imports: [
-    HttpModule,
-    ConfigModule,
-    KeycloakModule,
-    StalwartModule,
-  ],
-  providers: [
-    MailProvisioningService,
-    CryptoService,
-  ],
-  exports: [
-    MailProvisioningService,
-    CryptoService,
-  ],
+  imports: [HttpModule, ConfigModule, KeycloakModule, StalwartModule],
+  providers: [MailProvisioningService, CryptoService],
+  exports: [MailProvisioningService, CryptoService],
 })
-export class MailProvisioningModule { }
+export class MailProvisioningModule {}
