@@ -5,19 +5,16 @@ import { ConfigModule } from "@nestjs/config";
 import { HttpModule } from "@nestjs/axios";
 import { TerminusModule } from "@nestjs/terminus";
 
-import { AppController } from "./app.controller";
+
+
 import { appConfig } from "./config/app.config";
-import { AppService } from "./app.service";
-
 import { authConfig } from "./config/auth.config";
-import { AuthModule } from "./modules/auth/auth.module";
-
-import { HealthController } from "./modules/health/health.controller";
-
+import { mailConfig } from "./config/mail.config";
 import { validate } from "./config/env.validation";
 
-import { mailConfig } from "./config/mail.config";
+import { AuthModule } from "./modules/auth/auth.module";
 import { EmailModule } from "./modules/email/email.module";
+import { HealthController } from "./modules/health/health.controller";
 import { IntegrationModule } from "./modules/integration/integration.module";
 
 @Module({
@@ -39,9 +36,8 @@ import { IntegrationModule } from "./modules/integration/integration.module";
       },
     ]),
   ],
-  controllers: [AppController, HealthController],
+  controllers: [HealthController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
