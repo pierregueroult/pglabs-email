@@ -8,7 +8,7 @@ import { AuthController } from "./auth.controller";
 import { OauthStrategy } from "./strategies/oauth.strategy";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 
-import { MailProvisioningModule } from "../mail-provisioning/mail-provisioning.module";
+import { MailProvisioningModule } from "../email/provisioning/provisioning.module";
 
 @Module({
   imports: [

@@ -3,18 +3,18 @@ import { OauthGuard } from "./guards/oauth.guard";
 import { AuthService } from "./auth.service";
 import type { Request, Response } from "express";
 
-import { MailProvisioningService } from "../mail-provisioning/mail-provisioning.service";
+import { MailProvisioningService } from "../email/provisioning/provisioning.service";
 
 @Controller("auth")
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly mailProvisioningService: MailProvisioningService,
-  ) {}
+  ) { }
 
   @Get("login")
   @UseGuards(OauthGuard)
-  login() {}
+  login() { }
 
   @Get("callback")
   @UseGuards(OauthGuard)

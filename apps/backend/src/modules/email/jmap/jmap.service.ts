@@ -2,9 +2,9 @@ import { Injectable, Logger } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { ConfigService } from "@nestjs/config";
 import { lastValueFrom } from "rxjs";
-import { KeycloakAdminService } from "../mail-provisioning/keycloak-admin.service";
-import { CryptoService } from "../mail-provisioning/crypto.service";
-import { StalwartService } from "../mail-provisioning/stalwart.service";
+import { KeycloakAdminService } from "../../integration/keycloak/keycloak-admin.service";
+import { CryptoService } from "../provisioning/crypto.service";
+import { StalwartService } from "../../integration/stalwart/stalwart.service";
 import {
     JmapSession,
     JmapRequest,

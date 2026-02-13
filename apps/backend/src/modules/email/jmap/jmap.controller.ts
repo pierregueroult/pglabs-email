@@ -8,7 +8,7 @@ import {
     Req,
 } from "@nestjs/common";
 import { JmapService } from "./jmap.service";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../auth/guards/jwt-auth.guard";
 
 @Controller("jmap")
 @UseGuards(JwtAuthGuard)

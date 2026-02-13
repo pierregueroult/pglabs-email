@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { KeycloakAdminService } from "./keycloak-admin.service";
-import { StalwartService } from "./stalwart.service";
+import { KeycloakAdminService } from "../../integration/keycloak/keycloak-admin.service";
+import { StalwartService } from "../../integration/stalwart/stalwart.service";
 import { CryptoService } from "./crypto.service";
 import * as crypto from "crypto";
 

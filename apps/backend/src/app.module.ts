@@ -15,8 +15,8 @@ import { HealthController } from "./modules/health/health.controller";
 import { validate } from "./config/env.validation";
 
 import { mailConfig } from "./config/mail.config";
-import { MailProvisioningModule } from "./modules/mail-provisioning/mail-provisioning.module";
-import { JmapModule } from "./modules/jmap/jmap.module";
+import { EmailModule } from "./modules/email/email.module";
+import { IntegrationModule } from "./modules/integration/integration.module";
 
 @Module({
   imports: [
@@ -28,8 +28,8 @@ import { JmapModule } from "./modules/jmap/jmap.module";
     TerminusModule,
     HttpModule,
     AuthModule,
-    MailProvisioningModule,
-    JmapModule,
+    EmailModule,
+    IntegrationModule,
   ],
   controllers: [AppController, HealthController],
   providers: [AppService],

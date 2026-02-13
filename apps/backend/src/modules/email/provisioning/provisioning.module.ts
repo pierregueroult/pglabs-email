@@ -1,24 +1,25 @@
 import { Module } from "@nestjs/common";
 import { HttpModule } from "@nestjs/axios";
 import { ConfigModule } from "@nestjs/config";
-import { KeycloakAdminService } from "./keycloak-admin.service";
-import { StalwartService } from "./stalwart.service";
+import { KeycloakModule } from "../../integration/keycloak/keycloak.module";
+import { StalwartModule } from "../../integration/stalwart/stalwart.module";
 import { CryptoService } from "./crypto.service";
-import { MailProvisioningService } from "./mail-provisioning.service";
+import { MailProvisioningService } from "./provisioning.service";
 
 @Module({
-  imports: [HttpModule, ConfigModule],
+  imports: [
+    HttpModule,
+    ConfigModule,
+    KeycloakModule,
+    StalwartModule,
+  ],
   providers: [
-    KeycloakAdminService,
-    StalwartService,
     MailProvisioningService,
     CryptoService,
   ],
   exports: [
     MailProvisioningService,
-    KeycloakAdminService,
     CryptoService,
-    StalwartService,
   ],
 })
 export class MailProvisioningModule { }
