@@ -432,7 +432,6 @@ export class JmapService {
                   rcptTo: [{ email: to }],
                 },
               },
-
             },
             onSuccessUpdateEmail: {
               [draftId]: {
@@ -464,8 +463,8 @@ export class JmapService {
   }
 
   /**
-* Creates a new mailbox.
-*/
+   * Creates a new mailbox.
+   */
   async createMailbox(userId: string, name: string): Promise<JmapMailbox> {
     const { session, accountId, authHeader } = await this.getSession(userId);
 
@@ -491,10 +490,14 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Mailbox/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Mailbox/set",
+    );
 
     if (!methodResponse || methodResponse[1].notCreated) {
-      throw new Error(`Failed to create mailbox: ${JSON.stringify(methodResponse?.[1].notCreated)}`);
+      throw new Error(
+        `Failed to create mailbox: ${JSON.stringify(methodResponse?.[1].notCreated)}`,
+      );
     }
 
     return methodResponse[1].created.m1;
@@ -503,7 +506,11 @@ export class JmapService {
   /**
    * Renames a mailbox.
    */
-  async renameMailbox(userId: string, mailboxId: string, name: string): Promise<void> {
+  async renameMailbox(
+    userId: string,
+    mailboxId: string,
+    name: string,
+  ): Promise<void> {
     const { session, accountId, authHeader } = await this.getSession(userId);
 
     const request: JmapRequest = {
@@ -528,10 +535,14 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Mailbox/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Mailbox/set",
+    );
 
     if (!methodResponse || methodResponse[1].notUpdated) {
-      throw new Error(`Failed to rename mailbox: ${JSON.stringify(methodResponse?.[1].notUpdated)}`);
+      throw new Error(
+        `Failed to rename mailbox: ${JSON.stringify(methodResponse?.[1].notUpdated)}`,
+      );
     }
   }
 
@@ -559,17 +570,25 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Mailbox/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Mailbox/set",
+    );
 
     if (!methodResponse || methodResponse[1].notDestroyed) {
-      throw new Error(`Failed to delete mailbox: ${JSON.stringify(methodResponse?.[1].notDestroyed)}`);
+      throw new Error(
+        `Failed to delete mailbox: ${JSON.stringify(methodResponse?.[1].notDestroyed)}`,
+      );
     }
   }
 
   /**
    * Sets the seen/read status of an email.
    */
-  async setEmailSeen(userId: string, emailId: string, isSeen: boolean): Promise<void> {
+  async setEmailSeen(
+    userId: string,
+    emailId: string,
+    isSeen: boolean,
+  ): Promise<void> {
     const { session, accountId, authHeader } = await this.getSession(userId);
 
     const request: JmapRequest = {
@@ -594,17 +613,24 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Email/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Email/set",
+    );
     if (!methodResponse || methodResponse[1].notUpdated) {
-      throw new Error(`Failed to update email seen status: ${JSON.stringify(methodResponse?.[1].notUpdated)}`);
+      throw new Error(
+        `Failed to update email seen status: ${JSON.stringify(methodResponse?.[1].notUpdated)}`,
+      );
     }
-
   }
 
   /**
    * Sets the flagged/starred status of an email.
    */
-  async setEmailFlagged(userId: string, emailId: string, isFlagged: boolean): Promise<void> {
+  async setEmailFlagged(
+    userId: string,
+    emailId: string,
+    isFlagged: boolean,
+  ): Promise<void> {
     const { session, accountId, authHeader } = await this.getSession(userId);
 
     const request: JmapRequest = {
@@ -629,17 +655,24 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Email/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Email/set",
+    );
     if (!methodResponse || methodResponse[1].notUpdated) {
-      throw new Error(`Failed to update email flagged status: ${JSON.stringify(methodResponse?.[1].notUpdated)}`);
+      throw new Error(
+        `Failed to update email flagged status: ${JSON.stringify(methodResponse?.[1].notUpdated)}`,
+      );
     }
   }
-
 
   /**
    * Moves an email to a specific mailbox.
    */
-  async moveEmail(userId: string, emailId: string, targetMailboxId: string): Promise<void> {
+  async moveEmail(
+    userId: string,
+    emailId: string,
+    targetMailboxId: string,
+  ): Promise<void> {
     const { session, accountId, authHeader } = await this.getSession(userId);
 
     // We simply overwrite the mailboxIds map to contain ONLY the target mailbox.
@@ -666,10 +699,14 @@ export class JmapService {
       { session, authHeader },
       request,
     );
-    const methodResponse = response.methodResponses.find((r) => r[0] === "Email/set");
+    const methodResponse = response.methodResponses.find(
+      (r) => r[0] === "Email/set",
+    );
 
     if (!methodResponse || methodResponse[1].notUpdated) {
-      throw new Error(`Failed to move email: ${JSON.stringify(methodResponse?.[1].notUpdated)}`);
+      throw new Error(
+        `Failed to move email: ${JSON.stringify(methodResponse?.[1].notUpdated)}`,
+      );
     }
   }
 
@@ -704,15 +741,25 @@ export class JmapService {
       ],
     };
 
-    const getResponse = await this.executeJmapRequest({ session, authHeader }, getRequest);
-    const getMethodResponse = getResponse.methodResponses.find((r) => r[0] === "Email/get");
+    const getResponse = await this.executeJmapRequest(
+      { session, authHeader },
+      getRequest,
+    );
+    const getMethodResponse = getResponse.methodResponses.find(
+      (r) => r[0] === "Email/get",
+    );
 
-    if (!getMethodResponse || !getMethodResponse[1].list || getMethodResponse[1].list.length === 0) {
+    if (
+      !getMethodResponse ||
+      !getMethodResponse[1].list ||
+      getMethodResponse[1].list.length === 0
+    ) {
       throw new Error("Email not found");
     }
 
     const email = getMethodResponse[1].list[0];
-    const isInTrash = email.mailboxIds && email.mailboxIds[trashMailbox.id] === true;
+    const isInTrash =
+      email.mailboxIds && email.mailboxIds[trashMailbox.id] === true;
 
     if (isInTrash) {
       // Permanently destroy
@@ -730,12 +777,18 @@ export class JmapService {
         ],
       };
 
-      const destroyResponse = await this.executeJmapRequest({ session, authHeader }, destroyRequest);
-      const destroyMethodResponse = destroyResponse.methodResponses.find((r) => r[0] === "Email/set");
+      const destroyResponse = await this.executeJmapRequest(
+        { session, authHeader },
+        destroyRequest,
+      );
+      const destroyMethodResponse = destroyResponse.methodResponses.find(
+        (r) => r[0] === "Email/set",
+      );
       if (!destroyMethodResponse || destroyMethodResponse[1].notDestroyed) {
-        throw new Error(`Failed to destroy email: ${JSON.stringify(destroyMethodResponse?.[1].notDestroyed)}`);
+        throw new Error(
+          `Failed to destroy email: ${JSON.stringify(destroyMethodResponse?.[1].notDestroyed)}`,
+        );
       }
-
     } else {
       // Move to Trash
       await this.moveEmail(userId, emailId, trashMailbox.id);

@@ -27,4 +27,4 @@ import { MailProvisioningModule } from "../email/provisioning/provisioning.modul
   providers: [AuthService, OauthStrategy, JwtStrategy],
   controllers: [AuthController],
 })
-export class AuthModule { }
+export class AuthModule {}

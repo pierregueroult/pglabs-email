@@ -10,11 +10,11 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly mailProvisioningService: MailProvisioningService,
-  ) { }
+  ) {}
 
   @Get("login")
   @UseGuards(OauthGuard)
-  login() { }
+  login() {}
 
   @Get("callback")
   @UseGuards(OauthGuard)

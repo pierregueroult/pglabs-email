@@ -17,13 +17,13 @@ import {
   RenameMailboxDto,
   MoveEmailDto,
   SetReadStatusDto,
-  SetFlagStatusDto
+  SetFlagStatusDto,
 } from "./dtos/jmap.dto";
 
 @Controller("jmap")
 @UseGuards(JwtAuthGuard)
 export class JmapController {
-  constructor(private readonly jmapService: JmapService) { }
+  constructor(private readonly jmapService: JmapService) {}
 
   @Get("mailboxes")
   async getMailboxes(@Req() req: any) {
