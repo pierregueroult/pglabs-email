@@ -3,9 +3,9 @@ import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly jwtService: JwtService) { }
+  constructor(private readonly jwtService: JwtService) {}
 
-    generateJwt(payload: { email: string }) {
-        return this.jwtService.sign(payload);
-    }
+  generateJwt(payload: { id: string; email: string }): string {
+    return this.jwtService.sign({ sub: payload.id, email: payload.email });
+  }
 }

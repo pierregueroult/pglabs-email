@@ -6,6 +6,7 @@ import {
   IsUrl,
   validateSync,
   IsOptional,
+  Length,
 } from "class-validator";
 
 enum Environment {
@@ -67,6 +68,12 @@ class EnvironmentVariables {
   @IsString()
   STALWART_ADMIN_PASSWORD: string;
 
+  @IsString()
+  @Length(64, 64, {
+    message: "ENCRYPTION_KEY must be exactly 64 characters long (32 bytes hex)",
+  })
+  ENCRYPTION_KEY!: string;
+
   @IsUrl({ require_tld: false })
   KEYCLOAK_ADMIN_URL: string;
 
@@ -81,11 +88,9 @@ class EnvironmentVariables {
 }
 
 export function validate(config: Record<string, unknown>) {
-  const validatedConfig = plainToInstance(
-    EnvironmentVariables,
-    config,
-    { enableImplicitConversion: true },
-  );
+  const validatedConfig = plainToInstance(EnvironmentVariables, config, {
+    enableImplicitConversion: true,
+  });
   const errors = validateSync(validatedConfig, {
     skipMissingProperties: false,
   });

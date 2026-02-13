@@ -51,10 +51,38 @@ export class StalwartService {
       );
     } catch (error: any) {
       if (error.response?.status === 409) {
-        // Account already exists, which is fine
+        // Account already exists, update the secret to ensure it's in sync
+        await this.updateAccount(name, secret);
         return;
       }
       throw error;
+    }
+  }
+
+  async updateAccount(name: string, secret: string) {
+    console.log(`Attempting to update secret for account: ${name}`);
+    const url = `${this.apiUrl}/api/principal/${encodeURIComponent(name)}`;
+    const headers = {
+      Authorization: `Basic ${this.auth}`,
+      "Content-Type": "application/json",
+    };
+
+    const data = {
+      secrets: [secret],
+    };
+
+    try {
+      await lastValueFrom(
+        this.httpService.patch(url, data, {
+          headers,
+        }),
+      );
+      console.log(`Successfully updated secret for account: ${name}`);
+    } catch (error) {
+      console.error(
+        `Failed to update account ${name} on Stalwart`,
+        error.response?.data || error.message,
+      );
     }
   }
 }

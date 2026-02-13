@@ -1,6 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { KeycloakAdminService } from "./keycloak-admin.service";
 import { StalwartService } from "./stalwart.service";
+import { CryptoService } from "./crypto.service";
 import * as crypto from "crypto";
 
 @Injectable()
@@ -10,26 +11,46 @@ export class MailProvisioningService {
   constructor(
     private readonly keycloakAdminService: KeycloakAdminService,
     private readonly stalwartService: StalwartService,
-  ) {}
+    private readonly cryptoService: CryptoService,
+  ) { }
 
   async provisionMailbox(userId: string) {
-    this.logger.log(`Provisioning mailbox for user ${userId}`);
-
     const user = await this.keycloakAdminService.getUser(userId);
     if (!user) {
       throw new Error(`User with ID ${userId} not found`);
     }
-
     let mailPassword = user.attributes?.mail_password?.[0];
+    let plainPassword = "";
 
     if (!mailPassword) {
-      this.logger.log(`Generating new mail password for user ${userId}`);
-      mailPassword = this.generateStrongPassword();
+      this.logger.log(
+        `No mail_password found for user ${userId}. Generating new one.`,
+      );
+      plainPassword = this.generateStrongPassword();
+      // Log removed for security
+
+      const encryptedPassword = this.cryptoService.encrypt(plainPassword);
+
       await this.keycloakAdminService.updateUserAttribute(
         userId,
         "mail_password",
-        mailPassword,
+        encryptedPassword,
       );
+
+      mailPassword = encryptedPassword;
+    } else {
+      try {
+        plainPassword = this.cryptoService.decrypt(mailPassword);
+      } catch (error) {
+        plainPassword = this.generateStrongPassword();
+        const encrypted = this.cryptoService.encrypt(plainPassword);
+        await this.keycloakAdminService.updateUserAttribute(
+          userId,
+          "mail_password",
+          encrypted,
+        );
+        mailPassword = encrypted;
+      }
     }
 
     if (!user.email) {
@@ -45,15 +66,12 @@ export class MailProvisioningService {
         ? `${user.firstName} ${user.lastName}`
         : user.username;
 
-    this.logger.log(`Creating Stalwart account for ${user.email}`);
     await this.stalwartService.createAccount(
       user.username,
       displayName,
       user.email,
-      mailPassword,
+      plainPassword,
     );
-
-    this.logger.log(`Mailbox provisioned successfully for ${user.email}`);
   }
 
   private generateStrongPassword(length = 16): string {

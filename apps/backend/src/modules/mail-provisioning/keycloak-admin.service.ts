@@ -56,7 +56,6 @@ export class KeycloakAdminService implements OnModuleInit {
     );
 
     this.accessToken = response.data.access_token;
-    // expires_in is in seconds
     this.tokenExpiresAt = now + response.data.expires_in;
 
     return this.accessToken as string;
@@ -80,7 +79,7 @@ export class KeycloakAdminService implements OnModuleInit {
     await this.kcAdminClient.users.update(
       { id: userId },
       {
-        username: user.username,
+        ...user,
         attributes: attributes,
       },
     );

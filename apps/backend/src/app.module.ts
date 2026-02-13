@@ -32,4 +32,4 @@ import { MailProvisioningModule } from "./modules/mail-provisioning/mail-provisi
   controllers: [AppController, HealthController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
