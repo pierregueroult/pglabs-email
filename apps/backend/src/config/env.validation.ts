@@ -85,6 +85,9 @@ class EnvironmentVariables {
 
   @IsString()
   KEYCLOAK_ADMIN_CLIENT_SECRET: string;
+
+  @IsUrl({ require_tld: false })
+  KEYCLOAK_JMAP_WELL_KNOW_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

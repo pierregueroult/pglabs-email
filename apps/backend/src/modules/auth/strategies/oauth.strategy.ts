@@ -19,8 +19,7 @@ export class OauthStrategy extends PassportStrategy(Strategy, "oauth") {
     });
   }
 
-  validate(issuer: string, profile: Profile, done: VerifyCallback) {
-    // TODO LATER : save the user to redis
+  validate(_issuer: string, profile: Profile, done: VerifyCallback) {
     return done(null, {
       id: profile.id,
       email: profile.emails?.[0]?.value,

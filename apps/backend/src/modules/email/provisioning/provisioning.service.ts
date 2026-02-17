@@ -1,12 +1,11 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+
 import { KeycloakService } from "../../integration/keycloak/keycloak.service";
 import { StalwartService } from "../../integration/stalwart/stalwart.service";
 import { CryptoService } from "../../../commons/crypto/crypto.service";
 
 @Injectable()
 export class MailProvisioningService {
-  private readonly logger = new Logger(MailProvisioningService.name);
-
   constructor(
     private readonly keycloakService: KeycloakService,
     private readonly stalwartService: StalwartService,

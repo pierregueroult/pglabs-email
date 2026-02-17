@@ -9,6 +9,7 @@ import { JwtService } from "@nestjs/jwt";
 import { AuthGuard } from "@nestjs/passport";
 import type { Request } from "express";
 import { PUBLIC_KEY } from "../decorators/public.decorator";
+import { UserSession } from "../auth.type";
 
 @Injectable()
 export class JwtGuard extends AuthGuard("jwt") {
@@ -35,12 +36,9 @@ export class JwtGuard extends AuthGuard("jwt") {
 
     try {
       const secret = this.configService.getOrThrow<string>("auth.jwt.secret");
-      const payload = await this.jwtService.verifyAsync<{ email: string }>(
-        token,
-        { secret },
-      );
-
-      // TODO: retrieve user from redis and attach to request, throw UnauthorizedException if user not found
+      const payload = await this.jwtService.verifyAsync<UserSession>(token, {
+        secret,
+      });
       request.user = payload;
       return true;
     } catch {

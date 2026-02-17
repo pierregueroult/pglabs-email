@@ -15,6 +15,7 @@ import { EmailModule } from "./modules/email/email.module";
 import { HealthController } from "./modules/health/health.controller";
 import { IntegrationModule } from "./modules/integration/integration.module";
 import { CommonsModule } from "./commons/commons.module";
+import { JwtGuard } from "./modules/auth/guards/jwt.guard";
 
 @Module({
   imports: [
@@ -41,6 +42,10 @@ import { CommonsModule } from "./commons/commons.module";
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
     },
   ],
 })

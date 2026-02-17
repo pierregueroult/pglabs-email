@@ -3,6 +3,8 @@ import type { Request } from "express";
 
 export const CurrentUser = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest<Request>().user;
+    const user = context.switchToHttp().getRequest<Request>().user;
+    if (!user) throw new Error("No user found in request");
+    return user;
   },
 );
