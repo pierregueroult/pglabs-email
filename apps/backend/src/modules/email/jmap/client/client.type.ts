@@ -20,9 +20,16 @@ import {
   MailboxSetResponse,
 } from "../mailbox/mailbox.type";
 
+import {
+  ThreadChangesResponse,
+  ThreadGetResponse,
+  ThreadMethodArgs,
+} from "../thread/thread.type";
+
 export type JmapMethodArgs = EmailMethodArgs &
   EmailSubmissionMethodArgs &
-  MailboxMethodArgs & { error: JmapError };
+  MailboxMethodArgs &
+  ThreadMethodArgs & { error: JmapError };
 
 export interface JmapMethodResponses {
   "Email/get": EmailGetResponse;
@@ -38,6 +45,8 @@ export interface JmapMethodResponses {
   "Mailbox/queryChanges": MailboxQueryChangesResponse;
   "Mailbox/changes": MailboxChangesResponse;
   "Mailbox/set": MailboxSetResponse;
+  "Thread/get": ThreadGetResponse;
+  "Thread/changes": ThreadChangesResponse;
 }
 
 export type JmapMethod = keyof JmapMethodArgs | "error";
