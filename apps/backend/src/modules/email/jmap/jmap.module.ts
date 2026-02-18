@@ -9,6 +9,7 @@ import { MailboxModule } from "./mailbox/mailbox.module";
 import { ClientModule } from "./client/client.module";
 import { BlobModule } from "./blob/blob.module";
 import { EmailModule } from "./email/email.module";
+import { IdentityModule } from "./identity/identity.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EmailModule } from "./email/email.module";
     EmailModule,
     ClientModule,
     BlobModule,
+    IdentityModule,
   ],
   providers: [JmapService],
   exports: [SessionModule],

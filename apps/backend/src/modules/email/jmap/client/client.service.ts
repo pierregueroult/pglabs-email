@@ -51,7 +51,7 @@ export class ClientService {
   async call<M extends keyof JmapMethodArgs>(
     userId: string,
     method: M,
-    args: Omit<JmapMethodArgs[M], "accountId">,
+    args: Omit<JmapMethodArgs[M], "accountId"> & { accountId?: string },
     callId = "r1",
   ): Promise<JmapParsedResponse> {
     return this.execute(userId, (builder) =>

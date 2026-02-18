@@ -12,6 +12,8 @@ export const mailConfig = registerAs("mail", () => ({
     clientId: process.env.KEYCLOAK_ADMIN_CLIENT_ID,
     clientSecret: process.env.KEYCLOAK_ADMIN_CLIENT_SECRET,
     wellKnownUrl: process.env.KEYCLOAK_JMAP_WELL_KNOW_URL,
+    uploadUrl: process.env.KEYCLOAK_JMAP_UPLOAD_URL,
+    downloadUrl: process.env.KEYCLOAK_JMAP_DOWNLOAD_URL,
   },
   encryptionKey: process.env.ENCRYPTION_KEY,
 }));

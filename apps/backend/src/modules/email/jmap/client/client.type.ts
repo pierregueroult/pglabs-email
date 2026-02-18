@@ -1,3 +1,4 @@
+import { BlobCopyResponse, BlobMethodArgs } from "../blob/blob.type";
 import {
   EmailChangesResponse,
   EmailCopyResponse,
@@ -10,6 +11,7 @@ import {
   EmailMethodArgs,
   EmailSubmissionMethodArgs,
 } from "../email/email.type";
+import { IdentityMethodArgs } from "../identity/identity.type";
 
 import {
   MailboxChangesResponse,
@@ -29,7 +31,9 @@ import {
 export type JmapMethodArgs = EmailMethodArgs &
   EmailSubmissionMethodArgs &
   MailboxMethodArgs &
-  ThreadMethodArgs & { error: JmapError };
+  ThreadMethodArgs &
+  IdentityMethodArgs &
+  BlobMethodArgs & { error: JmapError };
 
 export interface JmapMethodResponses {
   "Email/get": EmailGetResponse;
@@ -47,6 +51,7 @@ export interface JmapMethodResponses {
   "Mailbox/set": MailboxSetResponse;
   "Thread/get": ThreadGetResponse;
   "Thread/changes": ThreadChangesResponse;
+  "Blob/copy": BlobCopyResponse;
 }
 
 export type JmapMethod = keyof JmapMethodArgs | "error";
