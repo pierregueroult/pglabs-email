@@ -11,8 +11,18 @@ import {
   EmailSubmissionMethodArgs,
 } from "../email/email.type";
 
+import {
+  MailboxChangesResponse,
+  MailboxGetResponse,
+  MailboxMethodArgs,
+  MailboxQueryChangesResponse,
+  MailboxQueryResponse,
+  MailboxSetResponse,
+} from "../mailbox/mailbox.type";
+
 export type JmapMethodArgs = EmailMethodArgs &
-  EmailSubmissionMethodArgs & { error: JmapError };
+  EmailSubmissionMethodArgs &
+  MailboxMethodArgs & { error: JmapError };
 
 export interface JmapMethodResponses {
   "Email/get": EmailGetResponse;
@@ -23,6 +33,11 @@ export interface JmapMethodResponses {
   "Email/copy": EmailCopyResponse;
   "Email/import": EmailImportResponse;
   "Email/parse": EmailParseResponse;
+  "Mailbox/get": MailboxGetResponse;
+  "Mailbox/query": MailboxQueryResponse;
+  "Mailbox/queryChanges": MailboxQueryChangesResponse;
+  "Mailbox/changes": MailboxChangesResponse;
+  "Mailbox/set": MailboxSetResponse;
 }
 
 export type JmapMethod = keyof JmapMethodArgs | "error";
